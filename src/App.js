@@ -1,28 +1,59 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+// import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import './App.css'
+import { fetchRestaurant } from './actions/restaurant'
+
+// Class-based approach
 
 class App extends Component {
-  render() {
+  // Kind of like onInit
+  componentDidMount () {
+    console.log('mounted!')
+    this.props.fetchRestaurant()
+  }
+
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className='App'>
+        <h1>What's for lunch today?</h1>
+        <div>{this.props.restaurant}</div>
+        <button onClick={this.props.fetchRestaurant}>Nah. Pick something else.</button>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+// Kate's Preferred Less Verbose Functional Component Approach™
+
+// Can't have state in these components, however, which means all state must go
+// in Redux. This may or may not be the right call based on performance based
+// on what I'm reading, but I feel like starting this way and only
+// converting when necessary may be right?
+
+// These components don't have lifecycle methods like componentDidMount. They
+// act purely on props passed in. Now certainly those props can come from
+// Redux.
+
+// const App = props => (
+//   <div className='App'>
+//     <div>{props.restaurant}</div>
+//     <button onClick={props.fetchRestaurant}>Get Random Restaurant</button>
+//   </div>
+// )
+
+// Turns Redux state into React component props
+
+const mapStateToProps = ({restaurant}) => ({
+  restaurant
+})
+
+// Turns Redux actions into React component props
+
+function mapDispatchToProps (dispatch) {
+  return bindActionCreators({ fetchRestaurant }, dispatch)
+}
+
+// connect is the magic that lets a React component know about Redux.
+export default connect(mapStateToProps, mapDispatchToProps)(App)
