@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import './App.css'
 import { fetchRestaurant } from './actions/restaurant'
+import RestaurantDisplay from './components/RestaurantDisplay'
 
 // Class-based approach
 
@@ -17,9 +18,10 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
-        <h1>What's for lunch today?</h1>
-        <div>{this.props.restaurant}</div>
-        <button onClick={this.props.fetchRestaurant}>Nah. Pick something else.</button>
+        <RestaurantDisplay
+          restaurant={this.props.restaurant}
+          fetchRestaurant={this.props.fetchRestaurant}
+        />
       </div>
     )
   }
@@ -45,15 +47,18 @@ class App extends Component {
 
 // Turns Redux state into React component props
 
-const mapStateToProps = ({restaurant}) => ({
+const mapStateToProps = ({ restaurant }) => ({
   restaurant
 })
 
 // Turns Redux actions into React component props
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchRestaurant }, dispatch)
 }
 
 // connect is the magic that lets a React component know about Redux.
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)
