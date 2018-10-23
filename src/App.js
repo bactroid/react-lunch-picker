@@ -58,6 +58,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 // connect is the magic that lets a React component know about Redux.
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps
