@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import rootReducer from './reducers'
 import createSagaMiddleware from 'redux-saga'
+import { watchFetchRestaurant } from './sagas'
 
 const sagaMiddleware = createSagaMiddleware()
 
@@ -9,8 +10,11 @@ const sagaMiddleware = createSagaMiddleware()
 // actions that have promises in them and resolves them on our behalf.
 
 export default () => {
-  return createStore(
+  const store = createStore(
     rootReducer,
     applyMiddleware(sagaMiddleware)
   )
+
+  sagaMiddleware.run(watchFetchRestaurant)
+  return store
 }

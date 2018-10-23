@@ -11,7 +11,6 @@ import RestaurantDisplay from './components/RestaurantDisplay'
 class App extends Component {
   // Kind of like onInit
   componentDidMount () {
-    console.log('mounted!')
     this.props.fetchRestaurant()
   }
 

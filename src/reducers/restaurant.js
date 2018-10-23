@@ -1,6 +1,10 @@
-import { FETCH_RESTAURANT } from '../actions/restaurant'
+import {
+  RESTAURANT_UPDATE,
+  RESTAURANT_LOADING,
+  RESTAURANT_ERROR
+} from '../actions/restaurant'
 
-const initialState = "Loading..."
+const initialState = 'Loading...'
 
 // Reducers are pure functions that do not change state. Instead, we
 // take an initial state and an action, and return what we want our
@@ -19,8 +23,12 @@ const initialState = "Loading..."
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_RESTAURANT:
-      return action.payload.data.text
+    case RESTAURANT_UPDATE:
+      return action.payload
+    case RESTAURANT_LOADING:
+      return 'Loading...'
+    case RESTAURANT_ERROR:
+      return 'ERROR'
     default:
       return state
   }
