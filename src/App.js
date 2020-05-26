@@ -5,7 +5,7 @@ import RestaurantDisplay from './components/RestaurantDisplay'
 
 const LUNCH_PICKER_URL = 'https://6zkojio7gj.execute-api.us-east-1.amazonaws.com/dev/lunch'
 
-const App = () => {
+const useRestaurant = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [restaurant, setRestaurant] = useState('butts')
 
@@ -16,7 +16,12 @@ const App = () => {
     })
   }, [])
 
+  return {isLoading, restaurant}
+}
 
+const App = () => {
+
+  const {isLoading, restaurant} = useRestaurant()
 
   return (
     <div className='App'>
