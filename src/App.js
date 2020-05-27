@@ -45,7 +45,7 @@ const restaurantReducer = (state, action) => {
 
 const App = () => {
   const [state, dispatch] = useReducer(restaurantReducer, initialState);
-  const {isLoading, restaurant} = state
+  const { isLoading, restaurant } = state;
 
   const fetchRestaurant = async () => {
     dispatch({ type: FETCH_RESTAURANT_REQUEST });
@@ -55,7 +55,7 @@ const App = () => {
     } catch (e) {
       dispatch({ type: FETCH_RESTAURANT_ERROR, payload: e });
     }
-  }
+  };
 
   useEffect(fetchRestaurant, []);
 
