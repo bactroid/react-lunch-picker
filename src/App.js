@@ -31,6 +31,7 @@ const App = () => {
 
   return (
     <div className="App">
+      {hasError ? "Error retieving data. Please try again in a moment." : null}
       <RestaurantDisplay
         restaurant={isLoading ? "Loading..." : restaurant}
         fetchRestaurant={fetchRestaurant}
