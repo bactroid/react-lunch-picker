@@ -45,7 +45,7 @@ const restaurantReducer = (state, action) => {
 
 const App = () => {
   const [state, dispatch] = useReducer(restaurantReducer, initialState);
-  const { isLoading, restaurant } = state;
+  const { isLoading, restaurant, hasError } = state;
 
   const fetchRestaurant = async () => {
     dispatch({ type: FETCH_RESTAURANT_REQUEST });
@@ -63,6 +63,7 @@ const App = () => {
 
   return (
     <div className="App">
+      {hasError ? "Error retieving data. Please try again in a moment." : null}
       <RestaurantDisplay
         restaurant={isLoading ? "Loading..." : restaurant}
         fetchRestaurant={fetchRestaurant}
