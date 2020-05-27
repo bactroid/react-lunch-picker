@@ -57,7 +57,9 @@ const App = () => {
     }
   };
 
-  useEffect(fetchRestaurant, []);
+  useEffect(() => {
+    fetchRestaurant();
+  }, []);
 
   return (
     <div className="App">
