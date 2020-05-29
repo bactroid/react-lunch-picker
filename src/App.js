@@ -14,9 +14,15 @@ const App = () => {
     [restaurant, isLoading, hasError, fetchRestaurant]
   );
 
+  if (hasError) {
+    return (
+      <div className="error-box">
+        Error retieving data. Please try again in a moment.
+      </div>
+    );
+  }
   return (
     <RestaurantContext.Provider value={contextValue}>
-      {hasError ? "Error retieving data. Please try again in a moment." : null}
       <RestaurantDisplay
         restaurant={isLoading ? "Loading..." : restaurant}
         fetchRestaurant={fetchRestaurant}
